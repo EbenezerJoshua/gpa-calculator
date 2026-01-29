@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semester GPA Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .calculator {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px 0;
+    }
+    label {
+      margin-right: 10px;
+    }
+    select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      width: 80px;
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .section-heading {
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .footer {
+      margin-top: 10px;
+      font-size: 12px;
+      color: gray;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Semester GPA Calculator</h2>
+    <h3 class="section-heading">Theory Exams</h3>
+    
+    <div class="input-group">
+      <label for="num1">Subject 1:</label>
+      <select id="num1"> </select>
+    </div>
+    
+    <div class="input-group">
+      <label for="num2">Subject 2:</label>
+      <select id="num2"> </select>
+    </div>
+    
+    <div class="input-group">
+      <label for="num3">Subject 3:</label>
+      <select id="num3"> </select>
+    </div>
+    
+    <div class="input-group">
+      <label for="num4">Subject 4:</label>
+      <select id="num4"> </select>
+    </div>
+    
+    <div class="input-group">
+      <label for="num5">Subject 5:</label>
+      <select id="num5"> </select>
+    </div>
+    
+    <h3 class="section-heading">Practical Exams</h3>
+    
+    <div class="input-group">
+      <label for="num6">Lab 1:</label>
+      <select id="num6"> </select>
+    </div>
+    
+    <div class="input-group">
+      <label for="num7">Lab 2:</label>
+      <select id="num7"> </select>
+    </div>
+    
+    <div class="input-group">
+      <label for="num8">Lab 3:</label>
+      <select id="num8"> </select>
+    </div>
+    
+    <button onclick="calculate()">Calculate</button>
+    <div id="result">Result:</div>
+    
+    <div class="footer">Created by Joshua</div>
+  </div>
+  
+  <script>
+    const gradeMapping = { "S": 10, "A": 9, "B": 8, "C": 7, "D": 6, "E": 5, "F": 0 };
+    
+    function populateSelectBoxes() {
+      const grades = Object.keys(gradeMapping);
+      document.querySelectorAll("select").forEach(select => {
+        grades.forEach(grade => {
+          let option = document.createElement("option");
+          option.value = gradeMapping[grade];
+          option.textContent = grade;
+          select.appendChild(option);
+        });
+      });
+    }
+    
+    function calculate() {
+      let num1 = parseInt(document.getElementById('num1').value) || 0;
+      let num2 = parseInt(document.getElementById('num2').value) || 0;
+      let num3 = parseInt(document.getElementById('num3').value) || 0;
+      let num4 = parseInt(document.getElementById('num4').value) || 0;
+      let num5 = parseInt(document.getElementById('num5').value) || 0;
+      let num6 = parseInt(document.getElementById('num6').value) || 0;
+      let num7 = parseInt(document.getElementById('num7').value) || 0;
+      let num8 = parseInt(document.getElementById('num8').value) || 0;
+      
+      let sumOfFiveMultipliedByFour = (num1 + num2 + num3 + num4 + num5) * 4;
+      let sumOfThreeMultipliedByTwo = (num6 + num7 + num8) * 2;
+      let total = (sumOfFiveMultipliedByFour + sumOfThreeMultipliedByTwo) / 26;
+      
+      document.getElementById('result').innerText = 'Result: ' + total.toFixed(2);
+    }
+    
+    window.onload = populateSelectBoxes;
+  </script>
+</body>
+</html>
